@@ -1,0 +1,28 @@
+database:
+  driver: postgres
+  host: localhost
+  user: ROOT
+  port: 5432
+  password: 123456
+  dbname: MAN
+  ssl_mode: disable
+  max_idle_con: 5
+  max_open_con: 5
+
+redis:
+  address: "localhost:6379"
+  password: ""
+  db: 0
+
+server:
+  address: ":8080"
+  write_timeout: 5s
+  read_timeout: 5s
+
+app:
+  base_url: "localhost:8080"
+  default_duration: "2h"
+  cleanup_interval: "1h"
+
+shortcode:
+  length: 6

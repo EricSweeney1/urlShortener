@@ -22,4 +22,12 @@ migrate_drop:
 	migrate -path="database/migrate" -database=${databaseURL} drop -f
 
 
-start_db: make_postgres make_redis
+make_db: make_postgres make_redis
+
+start_pg:
+	docker start my-pg
+
+start_rd:
+	docker start my-rd
+
+start_db: start_pg start_rd

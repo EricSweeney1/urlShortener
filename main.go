@@ -1,6 +1,8 @@
 package main
 
-import "github.com/Dashboard/urlShortener/application"
+import (
+	"github.com/Dashboard/urlShortener/application"
+)
 
 func main() {
 	a := application.Application{}

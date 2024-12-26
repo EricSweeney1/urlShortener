@@ -20,7 +20,7 @@ server:
   read_timeout: 5s
 
 app:
-  base_url: "localhost:8080"
+  base_url: "${HOSTNAME}:8080"
   default_duration: "2h"
   cleanup_interval: "1h"
 

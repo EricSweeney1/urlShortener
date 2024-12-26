@@ -48,7 +48,8 @@ func (a *Application) Init(filePath string) error {
 	}
 	a.redisClient = redisClient
 	a.shortCodeGenerator = shortCode.NewShortCode(config.ShortCode.Length)
-	a.urlService = service.NewURLService(db, a.shortCodeGenerator, config.App.DefaultDuration, redisClient, config.App.BaseURL)
+	BaseURL := config.App.BaseHost + config.App.BasePort
+	a.urlService = service.NewURLService(db, a.shortCodeGenerator, config.App.DefaultDuration, redisClient, BaseURL)
 	a.urlHandler = api.NewURLHandler(a.urlService)
 	e := echo.New()
 	e.Server.WriteTimeout = config.Server.WriteTimeout

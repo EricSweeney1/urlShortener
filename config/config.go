@@ -60,7 +60,8 @@ type ServerConfig struct {
 }
 
 type AppConfig struct {
-	BaseURL         string        `mapstructure:"base_url"`
+	BaseHost        string        `mapstructure:"base_host"`
+	BasePort        string        `mapstructure:"base_port"`
 	DefaultDuration time.Duration `mapstructure:"default_duration"`
 	CleanUpInterval time.Duration `mapstructure:"cleanup_interval"`
 }

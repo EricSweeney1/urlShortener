@@ -3,6 +3,7 @@ package config
 import (
 	"fmt"
 	"github.com/spf13/viper"
+	"os"
 	"strings"
 	"time"
 )
@@ -23,6 +24,12 @@ func LoadConfig(filePath string) (*Config, error) {
 
 	if err := viper.ReadInConfig(); err != nil {
 		return nil, err
+	}
+
+	for _, key := range viper.AllKeys() {
+		value := viper.GetString(key)
+		expandedValue := os.ExpandEnv(value) // 替换 ${VAR} 格式的环境变量
+		viper.Set(key, expandedValue)
 	}
 	var config Config
 	if err := viper.Unmarshal(&config); err != nil {

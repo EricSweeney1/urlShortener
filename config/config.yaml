@@ -20,7 +20,7 @@ server:
   read_timeout: 5s
 
 app:
-  base_host: ${HOSTNAME}
+  base_host: ${HOST_NAME}
   base_port: ":8080"
   default_duration: "2h"
   cleanup_interval: "1h"

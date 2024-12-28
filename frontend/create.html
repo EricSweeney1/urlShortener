@@ -151,12 +151,41 @@
 </div>
 
 <script>
+    async function createShortLink(original_url, custom_code = null, duration = null) {
+        const url = 'http://8.136.122.238/api/url'; // 替换为实际的 API 端点
+        const requestBody = {
+            original_url: original_url,
+            custom_code: custom_code,
+            duration: duration
+        };
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestBody)
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error creating short link:', error);
+            throw error;
+        }
+    }
+
     function createShortUrl() {
         const originalUrl = document.getElementById('original_url').value;
-        const customCode = document.getElementById('custom_code').value;
-        const resultDiv = document.getElementById('result');
-        const shortUrlLink = document.getElementById('short_url');
-        const originalUrlResult = document.getElementById('original_url_result');
+        var customCode = document.getElementById('custom_code').value||null;
+        // const resultDiv = document.getElementById('result');
+        // const shortUrlLink = document.getElementById('short_url');
+        // const originalUrlResult = document.getElementById('original_url_result');
 
         // 清空之前的结果
         resultDiv.style.display = 'none';
@@ -166,9 +195,19 @@
             alert('Please enter a URL.');
             return;
         }
+        createShortLink(originalUrl, customCode)
+            .then(data => {
+                customCode=data.short_url
+                console.log('Short URL:', data.short_url);
+                console.log('Original URL:', data.original_url);
+                console.log('Expire Time:', data.expire_time);
+            })
+            .catch(error => {
+                console.error('Failed to create short link:', error);
+            });
 
         // 模拟调用后端API创建短链接
-        const shortUrl = `http://8.136.122.238/${customCode || 'abc123'}`;
+        const shortUrl = `http://8.136.122.238/${customCode}`;
 
         // 显示结果
         shortUrlLink.href = shortUrl;

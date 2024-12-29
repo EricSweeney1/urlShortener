@@ -21,7 +21,7 @@ server:
 
 app:
   base_host: ${HOST_NAME}
-  base_port: ":8080"
+  base_port: ""
   default_duration: "2h"
   cleanup_interval: "1h"
 
